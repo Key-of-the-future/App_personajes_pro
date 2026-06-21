@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import com.example.apppersonajespro.components.SkinThumbnailCarousel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.Image
@@ -19,7 +20,6 @@ import com.example.apppersonajespro.components.getDrawableId
 import com.example.apppersonajespro.components.ChampionModelViewer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.apppersonajespro.components.SkinCarousel
 import com.example.apppersonajespro.components.StatBar
 import com.example.apppersonajespro.data.ChampionsData
 
@@ -29,14 +29,18 @@ fun ChampionDetailScreen(
     onBackClick: () -> Unit
 ) {
 
-    val champion = ChampionsData.getChampionById(championId)
+    var currentChampionId by remember {
+        mutableIntStateOf(championId)
+    }
 
     var selectedSkin by remember {
         mutableIntStateOf(0)
     }
 
+    val champion = ChampionsData.getChampionById(currentChampionId)
+
     val backgroundImage = getDrawableId(
-        champion.splashImageName
+        champion.skins[selectedSkin].backgroundName
     )
 
     Box(
@@ -81,7 +85,7 @@ fun ChampionDetailScreen(
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .width(330.dp)
+                    .width(300.dp)
                     .padding(start = 20.dp)
             ) {
 
@@ -100,33 +104,26 @@ fun ChampionDetailScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                StatBar(
-                    label = "Damage",
-                    value = champion.damage
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        StatBar("Damage", champion.damage)
+                        StatBar("Utility", champion.utility)
+                    }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                StatBar(
-                    label = "Toughness",
-                    value = champion.toughness
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                StatBar(
-                    label = "Utility",
-                    value = champion.utility
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                StatBar(
-                    label = "Difficulty",
-                    value = champion.difficulty
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        StatBar("Toughness", champion.toughness)
+                        StatBar("Difficulty", champion.difficulty)
+                    }
+                }
 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -150,6 +147,17 @@ fun ChampionDetailScreen(
                         }
                     }
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                SkinThumbnailCarousel(
+                    skins = champion.skins,
+                    selectedIndex = selectedSkin,
+                    onSkinClick = {
+                        selectedSkin = it
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
 
             // Centro modelo
@@ -174,16 +182,6 @@ fun ChampionDetailScreen(
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                SkinCarousel(
-                    skins = champion.skins,
-                    selectedIndex = selectedSkin,
-                    onSkinChange = {
-                        selectedSkin = it
-                    }
-                )
             }
 
             // Botones derecha
@@ -216,25 +214,45 @@ fun ChampionDetailScreen(
                 )
             }
 
-            // Flechas laterales
+            // Flecha izquierda: campeón anterior
+            IconButton(
+                onClick = {
+                    currentChampionId =
+                        if (currentChampionId == 1) ChampionsData.champions.size
+                        else currentChampionId - 1
 
-            Text(
-                text = "‹",
-                color = Color.White,
-                fontSize = 42.sp,
+                    selectedSkin = 0
+                },
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(start = 360.dp)
-            )
+            ) {
+                Text(
+                    text = "‹",
+                    color = Color.White,
+                    fontSize = 42.sp
+                )
+            }
 
-            Text(
-                text = "›",
-                color = Color.White,
-                fontSize = 42.sp,
+         // Flecha derecha: siguiente campeón
+            IconButton(
+                onClick = {
+                    currentChampionId =
+                        if (currentChampionId == ChampionsData.champions.size) 1
+                        else currentChampionId + 1
+
+                    selectedSkin = 0
+                },
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(end = 90.dp)
-            )
+            ) {
+                Text(
+                    text = "›",
+                    color = Color.White,
+                    fontSize = 42.sp
+                )
+            }
         }
     }
 }
