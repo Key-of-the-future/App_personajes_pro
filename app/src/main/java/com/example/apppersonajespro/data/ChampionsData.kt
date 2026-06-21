@@ -64,10 +64,37 @@ object ChampionsData {
             subtitle = "El Segador Sombrío",
             region = "Ionia",
             skins = listOf("Kayn", "Odyssey Kayn", "Heartsteel Kayn"),
-            fileKey = "kayn",
-            lore = "Aquí escribes el lore personalizado de Ahri.",
-            imageOffsetX = 0f,
-            imageOffsetY = -0.25f
+            fileKey = "kayn"
+        ).copy(
+            skins = listOf(
+                Skin(
+                    name = "Kayn",
+                    backgroundName = "kaynsplash_1",
+                    forms = listOf(
+                        ChampionForm("Kayn", "models/kayn/kayn.glb", "voices/kayn.m4a"),
+                        ChampionForm("Rhaast", "models/kayn/kayn_rhaast.glb", "voices/rhaast.m4a"),
+                        ChampionForm("Asesino", "models/kayn/kayn_assasin.glb", "voices/assasin.m4a")
+                    )
+                ),
+                Skin(
+                    name = "Odyssey Kayn",
+                    backgroundName = "kaynsplash_2",
+                    forms = listOf(
+                        ChampionForm("Kayn", "models/kayn/odyssey_kayn.glb", "voices/odyssey_kayn.m4a"),
+                        ChampionForm("Rhaast", "models/kayn/odyssey_kayn_rhaast.glb", "voices/odyssey_rhaast.m4a"),
+                        ChampionForm("Asesino", "models/kayn/odyssey_kayn_assasin.glb", "voices/odyssey_assasin.m4a")
+                    )
+                ),
+                Skin(
+                    name = "Heartsteel Kayn",
+                    backgroundName = "kaynsplash_3",
+                    forms = listOf(
+                        ChampionForm("Kayn", "models/kayn/heartsteel_kayn.glb", "voices/heartsteel_kayn.m4a"),
+                        ChampionForm("Rhaast", "models/kayn/heartsteel_kayn_rhaast.glb", "voices/heartsteel_rhaast.m4a"),
+                        ChampionForm("Asesino", "models/kayn/heartsteel_kayn_assasin.glb", "voices/heartsteel_assasinkayn.m4a")
+                    )
+                )
+            )
         ),
         champion(
             id = 7,
@@ -129,11 +156,35 @@ object ChampionsData {
             name = "Evelynn",
             subtitle = "El Abrazo Agónico",
             region = "Runaterra",
-            skins = listOf("Evelynn", "Coven Evelynn", "K DA ALL OUT Evelynn"),
-            fileKey = "evelynn",
-            lore = "Aquí escribes el lore personalizado de Ahri.",
-            imageOffsetX = 0.05f,
-            imageOffsetY = -0.25f
+            skins = listOf("Evelynn", "Coven Evelynn", "K/DA ALL OUT Evelynn"),
+            fileKey = "evelynn"
+        ).copy(
+            skins = listOf(
+                Skin(
+                    name = "Evelynn",
+                    backgroundName = "evelynnsplash_1",
+                    forms = listOf(
+                        ChampionForm("Normal", "models/evelynn/evelynn.glb", "voices/evelynn.m4a"),
+                        ChampionForm("Demoníaca", "models/evelynn/evelynn_demon.glb", "voices/evelynn_demon.m4a")
+                    )
+                ),
+                Skin(
+                    name = "Coven Evelynn",
+                    backgroundName = "evelynnsplash_2",
+                    forms = listOf(
+                        ChampionForm("Normal", "models/evelynn/coven_evelynn.glb", "voices/coven_evelynn.m4a"),
+                        ChampionForm("Demoníaca", "models/evelynn/coven_evelynn_demon.glb", "voices/coven_evelynn_demon.m4a")
+                    )
+                ),
+                Skin(
+                    name = "K/DA ALL OUT Evelynn",
+                    backgroundName = "evelynnsplash_3",
+                    forms = listOf(
+                        ChampionForm("Normal", "models/evelynn/k_da_all_out_evelynn.glb", "voices/k_da_all_out_evelynn.m4a"),
+                        ChampionForm("Demoníaca", "models/evelynn/k_da_all_out_evelynn_demon.glb", "voices/k_da_all_out_demon_evelynn.m4a")
+                    )
+                )
+            )
         ),
         champion(
             id = 13,
@@ -198,7 +249,7 @@ object ChampionsData {
             utility = (4..9).random(),
             difficulty = (3..9).random(),
             cardImageName = "${fileKey}_card",
-            voicePath = "voices/${fileKey}_intro.mp3",
+            voicePath = "voices/${fileKey}.m4a",
             skills = defaultSkills(fileKey),
             splashImageName = "${fileKey}splash_1",
             imageOffsetX = imageOffsetX,
@@ -210,10 +261,22 @@ object ChampionsData {
                     .replace(" ", "_")
                     .replace("-", "_")
 
+                val modelFileName = if (skinName == name) {
+                    "$fileKey.glb"
+                } else {
+                    "$skinKey.glb"
+                }
+
                 Skin(
                     name = skinName,
-                    modelPath = "models/$fileKey/$skinKey.glb",
-                    backgroundName = "${fileKey}splash_${skins.indexOf(skinName) + 1}"
+                    backgroundName = "${fileKey}splash_${skins.indexOf(skinName) + 1}",
+                    forms = listOf(
+                        ChampionForm(
+                            name = "Base",
+                            modelPath = "models/$fileKey/$modelFileName",
+                            voicePath = "voices/$skinKey.m4a"
+                        )
+                    )
                 )
             }
         )
