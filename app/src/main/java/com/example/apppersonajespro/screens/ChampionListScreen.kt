@@ -81,8 +81,8 @@ fun ChampionListScreen(
         LazyVerticalGrid(
             columns = GridCells.Fixed(5),
             modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             items(
                 items = filteredChampions,

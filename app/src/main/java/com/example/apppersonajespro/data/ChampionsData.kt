@@ -8,8 +8,11 @@ object ChampionsData {
             name = "Ahri",
             subtitle = "La Zorra de Nueve Colas",
             region = "Ionia",
-            skins = listOf("Base", "Spirit Blossom", "Spirit Blossom Springs"),
-            fileKey = "ahri"
+            skins = listOf("Ahri", "Spirit Blossom Ahri", "Spirit Blossom Springs Ahri"),
+            fileKey = "ahri",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.35f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 2,
@@ -17,7 +20,10 @@ object ChampionsData {
             subtitle = "La Dama Luminosa",
             region = "Demacia",
             skins = listOf("Base", "Empyrean", "Space Groove"),
-            fileKey = "lux"
+            fileKey = "lux",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.3f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 3,
@@ -25,7 +31,10 @@ object ChampionsData {
             subtitle = "La Redentora",
             region = "Islas de la Sombra",
             skins = listOf("Base", "High Noon", "Winterblessed"),
-            fileKey = "senna"
+            fileKey = "senna",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.25f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 4,
@@ -33,7 +42,10 @@ object ChampionsData {
             subtitle = "La Costurera Sagrada",
             region = "Camavor",
             skins = listOf("Base", "Cafe Cuties", "Space Groove"),
-            fileKey = "gwen"
+            fileKey = "gwen",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.05f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 5,
@@ -41,7 +53,10 @@ object ChampionsData {
             subtitle = "El Carcelero Implacable",
             region = "Islas de la Sombra",
             skins = listOf("Unbound", "Spirit Blossom", "Janitor"),
-            fileKey = "thresh"
+            fileKey = "thresh",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.01f,
+            imageOffsetY = 50f
         ),
         champion(
             id = 6,
@@ -49,7 +64,10 @@ object ChampionsData {
             subtitle = "El Segador Sombrío",
             region = "Ionia",
             skins = listOf("Base", "Odyssey", "Heartsteel"),
-            fileKey = "kayn"
+            fileKey = "kayn",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 7,
@@ -57,7 +75,10 @@ object ChampionsData {
             subtitle = "La Asesina Sigilosa",
             region = "Ionia",
             skins = listOf("Base", "Star Guardian", "Empyrean"),
-            fileKey = "akali"
+            fileKey = "akali",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.05f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 8,
@@ -65,7 +86,10 @@ object ChampionsData {
             subtitle = "La Cantante Soñadora",
             region = "Piltover",
             skins = listOf("Base", "Prestige Ocean Song", "Battle Dove"),
-            fileKey = "seraphine"
+            fileKey = "seraphine",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = -0.2f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 9,
@@ -73,7 +97,10 @@ object ChampionsData {
             subtitle = "La Caída",
             region = "Demacia",
             skins = listOf("Base", "Coven", "Prestige Veiled Lady"),
-            fileKey = "morgana"
+            fileKey = "morgana",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.75f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 10,
@@ -81,47 +108,65 @@ object ChampionsData {
             subtitle = "El Explorador Veloz",
             region = "Bandle City",
             skins = listOf("Base", "Omega Squad", "Space Groove"),
-            fileKey = "teemo"
+            fileKey = "teemo",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.15f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 11,
             name = "Rell",
             subtitle = "La Doncella de Hierro",
             region = "Noxus",
-            skins = listOf("Base", "Battle Queen", "Star Guardian"),
-            fileKey = "rell"
+            skins = listOf("Rell", "Battle Queen", "Star Guardian"),
+            fileKey = "rell",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = -0.02f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 12,
             name = "Evelynn",
             subtitle = "El Abrazo Agónico",
             region = "Runaterra",
-            skins = listOf("Base", "Coven", "K/DA ALL OUT"),
-            fileKey = "evelynn"
+            skins = listOf("Evelynn", "Coven", "K/DA ALL OUT"),
+            fileKey = "evelynn",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.05f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 13,
             name = "Vex",
             subtitle = "La Melancolista",
             region = "Islas de la Sombra",
-            skins = listOf("Base", "Dawnbringer", "Surprise Party"),
-            fileKey = "vex"
+            skins = listOf("Vex", "Dawnbringer", "Surprise Party"),
+            fileKey = "vex",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.28f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 14,
             name = "Jhin",
             subtitle = "El Virtuoso",
             region = "Ionia",
-            skins = listOf("Base", "Dark Star", "PROJECT"),
-            fileKey = "jhin"
+            skins = listOf("Jhin", "Dark Star", "PROJECT"),
+            fileKey = "jhin",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.15f,
+            imageOffsetY = -0.25f
         ),
         champion(
             id = 15,
             name = "Viego",
             subtitle = "El Rey Arruinado",
             region = "Camavor",
-            skins = listOf("Base", "Soul Fighter", "Pentakill"),
-            fileKey = "viego"
+            skins = listOf("Viego", "Soul Fighter", "Pentakill"),
+            fileKey = "viego",
+            lore = "Aquí escribes el lore personalizado de Ahri.",
+            imageOffsetX = 0.65f,
+            imageOffsetY = -0.25f
         )
     )
 
@@ -135,7 +180,10 @@ object ChampionsData {
         subtitle: String,
         region: String,
         skins: List<String>,
-        fileKey: String
+        fileKey: String,
+        lore: String = "Aquí irá el lore del campeón.",
+        imageOffsetX: Float = 0f,
+        imageOffsetY: Float = 0f
     ): Champion {
         return Champion(
             id = id,
@@ -143,7 +191,7 @@ object ChampionsData {
             subtitle = subtitle,
             region = region,
             phone = "47700000${id.toString().padStart(2, '0')}",
-            lore = "Aquí irá el lore de $name. Puedes editar este texto después con la historia real o una versión resumida.",
+            lore = lore,
             masteryPoints = 12000 + id * 850,
             damage = (5..9).random(),
             toughness = (3..8).random(),
@@ -152,6 +200,9 @@ object ChampionsData {
             cardImageName = "${fileKey}_card",
             voicePath = "voices/${fileKey}_intro.mp3",
             skills = defaultSkills(fileKey),
+            splashImageName = "${fileKey}splash_1",
+            imageOffsetX = imageOffsetX,
+            imageOffsetY = imageOffsetY,
             skins = skins.map { skinName ->
                 val skinKey = skinName
                     .lowercase()

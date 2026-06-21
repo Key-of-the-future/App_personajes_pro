@@ -1,34 +1,30 @@
 package com.example.apppersonajespro.ui.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import com.example.apppersonajespro.R
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+val LolFont = FontFamily(
+    Font(R.font.lolcito)
 )
+
+val AppTypography = Typography().run {
+    copy(
+        displayLarge = displayLarge.copy(fontFamily = LolFont),
+        displayMedium = displayMedium.copy(fontFamily = LolFont),
+        displaySmall = displaySmall.copy(fontFamily = LolFont),
+        headlineLarge = headlineLarge.copy(fontFamily = LolFont),
+        headlineMedium = headlineMedium.copy(fontFamily = LolFont),
+        headlineSmall = headlineSmall.copy(fontFamily = LolFont),
+        titleLarge = titleLarge.copy(fontFamily = LolFont),
+        titleMedium = titleMedium.copy(fontFamily = LolFont),
+        titleSmall = titleSmall.copy(fontFamily = LolFont),
+        bodyLarge = bodyLarge.copy(fontFamily = LolFont),
+        bodyMedium = bodyMedium.copy(fontFamily = LolFont),
+        bodySmall = bodySmall.copy(fontFamily = LolFont),
+        labelLarge = labelLarge.copy(fontFamily = LolFont),
+        labelMedium = labelMedium.copy(fontFamily = LolFont),
+        labelSmall = labelSmall.copy(fontFamily = LolFont)
+    )
+}

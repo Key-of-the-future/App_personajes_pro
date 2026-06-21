@@ -13,7 +13,10 @@ data class Champion(
     val utility: Int,
     val difficulty: Int,
     val cardImageName: String,
+    val splashImageName: String,
     val voicePath: String,
+    val imageOffsetX: Float = 0f,
+    val imageOffsetY: Float = 0f,
     val skills: List<Skill>,
     val skins: List<Skin>
 )
