@@ -6,7 +6,6 @@ data class Champion(
     val subtitle: String,
     val region: String,
     val phone: String,
-    val lore: String,
     val masteryPoints: Int,
     val damage: Int,
     val toughness: Int,

@@ -6,13 +6,18 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import com.example.apppersonajespro.components.SkinThumbnailCarousel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -27,6 +32,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.apppersonajespro.utils.SoundPlayer
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apppersonajespro.components.StatBar
@@ -48,6 +54,14 @@ fun ChampionDetailScreen(
 
     var selectedForm by remember {
         mutableIntStateOf(0)
+    }
+
+    var showLore by remember {
+        mutableStateOf(false)
+    }
+
+    var selectedSkill by remember {
+        mutableStateOf<com.example.apppersonajespro.data.Skill?>(null)
     }
 
     val champion = ChampionsData.getChampionById(currentChampionId)
@@ -115,70 +129,71 @@ fun ChampionDetailScreen(
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .width(300.dp)
-                    .padding(start = 20.dp)
+                    .width(295.dp)
+                    .padding(start = 64.dp)
             ) {
 
                 Text(
                     text = champion.name.uppercase(),
                     color = Color.White,
-                    fontSize = 42.sp,
+                    fontSize = 33.sp,
                     fontWeight = FontWeight.Bold
                 )
 
                 Text(
-                    text = champion.subtitle,
+                    text = champion.skins[selectedSkin].name,
                     color = Color(0xFFD7B45A),
-                    fontSize = 18.sp
+                    fontSize = 15.sp
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(1.dp))
 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(14.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                        modifier = Modifier.weight(0.05f),
+                        verticalArrangement = Arrangement.spacedBy(1.dp)
                     ) {
                         StatBar("Damage", champion.damage)
                         StatBar("Utility", champion.utility)
                     }
 
                     Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                        modifier = Modifier.weight(0.05f),
+                        verticalArrangement = Arrangement.spacedBy(1.dp),
                     ) {
                         StatBar("Toughness", champion.toughness)
                         StatBar("Difficulty", champion.difficulty)
                     }
                 }
 
+                Spacer(modifier = Modifier.height(15.dp))
+
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
 
-                    repeat(5) {
+                    champion.skins[selectedSkin].forms[selectedForm].skills.forEach { skill ->
 
-                        Box(
+                        val skillImage = getDrawableId(skill.iconName)
+
+                        Image(
+                            painter = painterResource(skillImage),
+                            contentDescription = skill.name,
                             modifier = Modifier
-                                .size(52.dp)
-                                .background(
-                                    Color.White.copy(alpha = 0.1f),
-                                    shape = CircleShape
-                                ),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "${it + 1}",
-                                color = Color.White
-                            )
-                        }
+                                .size(36.dp)
+                                .clip(RoundedCornerShape(6.dp))
+                                .clickable {
+                                    selectedSkill = skill
+                                },
+                            contentScale = ContentScale.Crop
+                        )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(58.dp))
 
                 SkinThumbnailCarousel(
                     skins = champion.skins,
@@ -229,8 +244,8 @@ fun ChampionDetailScreen(
                 Box(
                     modifier = Modifier
                         .size(
-                            width = 550.dp,
-                            height = 550.dp
+                            width = 480.dp,
+                            height = 600.dp
                         ),
                     contentAlignment = Alignment.Center
                 ) {
@@ -245,30 +260,81 @@ fun ChampionDetailScreen(
 
             Column(
                 modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = 18.dp),
-                verticalArrangement = Arrangement.spacedBy(22.dp)
+                    .align(Alignment.TopEnd)
+                    .padding(
+                        top = 30.dp,
+                        end = 22.dp),
+                verticalArrangement = Arrangement.spacedBy(25.dp)
             ) {
+                IconButton(
+                    onClick = {
+                        showLore = true
+                    },
+                    modifier = Modifier
+                        .size(28.dp)
+                        .background(
+                            Color(0xFFD7B45A),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        Icons.Default.Info,
+                        contentDescription = "Lore",
+                        tint = Color(0xFF0B1520),
+                        modifier = Modifier.size(15.dp)
+                    )
+                }
 
-                Text(
-                    text = "📖",
-                    fontSize = 28.sp
-                )
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .size(28.dp)
+                        .background(
+                            Color(0xFFD7B45A),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        Icons.Default.LocationOn,
+                        contentDescription = "Ubicacion",
+                        tint = Color(0xFF0B1520),
+                        modifier = Modifier.size(15.dp)
+                    )
+                }
 
-                Text(
-                    text = "📍",
-                    fontSize = 28.sp
-                )
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .size(28.dp)
+                        .background(
+                            Color(0xFFD7B45A),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        Icons.Default.Call,
+                        contentDescription = "Llamar",
+                        tint = Color(0xFF0B1520),
+                        modifier = Modifier.size(15.dp)
+                    )
+                }
 
-                Text(
-                    text = "☎",
-                    fontSize = 28.sp
-                )
-
-                Text(
-                    text = "↗",
-                    fontSize = 28.sp
-                )
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .size(28.dp)
+                        .background(
+                            Color(0xFFD7B45A),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        Icons.Default.Share,
+                        contentDescription = "Compartir",
+                        tint = Color(0xFF0B1520),
+                        modifier = Modifier.size(15.dp)
+                    )
+                }
             }
 
             // Flecha izquierda: campeón anterior
@@ -281,8 +347,10 @@ fun ChampionDetailScreen(
                     selectedForm = 0
                 },
                 modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = 360.dp)
+                    .align(Alignment.BottomStart)
+                    .padding(
+                        bottom = 135.dp,
+                        start = 12.dp)
             ) {
                 Text(
                     text = "‹",
@@ -301,13 +369,89 @@ fun ChampionDetailScreen(
                     selectedForm = 0
                 },
                 modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = 90.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(
+                        bottom = 135.dp,
+                        end = 12.dp)
             ) {
                 Text(
                     text = "›",
                     color = Color.White,
                     fontSize = 42.sp
+                )
+            }
+
+            if (selectedSkill != null) {
+                androidx.compose.material3.AlertDialog(
+                    modifier = Modifier.fillMaxWidth(0.72f),
+                    onDismissRequest = {
+                        selectedSkill = null
+                    },
+                    containerColor = Color(0xCC07121C),
+                    title = {
+                        Text(
+                            text = selectedSkill!!.name.uppercase(),
+                            color = Color(0xFFD7B45A),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    text = {
+                        Text(
+                            text = selectedSkill!!.description,
+                            color = Color.White,
+                            fontSize = 13.sp
+                        )
+                    },
+                    confirmButton = {
+                        Text(
+                            text = "Cerrar",
+                            color = Color(0xFFD7B45A),
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .clickable {
+                                    selectedSkill = null
+                                }
+                                .padding(12.dp)
+                        )
+                    }
+                )
+            }
+
+            if (showLore) {
+                androidx.compose.material3.AlertDialog(
+                    modifier = Modifier.fillMaxWidth(0.82f),
+                    onDismissRequest = {
+                        showLore = false
+                    },
+                    containerColor = Color(0xCC07121C),
+                    title = {
+                        Text(
+                            text = champion.skins[selectedSkin].name.uppercase(),
+                            color = Color(0xFFD7B45A),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    text = {
+                        Text(
+                            text = champion.skins[selectedSkin].lore,
+                            color = Color.White,
+                            fontSize = 13.sp
+                        )
+                    },
+                    confirmButton = {
+                        Text(
+                            text = "Cerrar",
+                            color = Color(0xFFD7B45A),
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .clickable {
+                                    showLore = false
+                                }
+                                .padding(12.dp)
+                        )
+                    }
                 )
             }
         }

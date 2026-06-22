@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun StatBar(
@@ -22,6 +23,7 @@ fun StatBar(
         Text(
             text = label,
             color = Color.White,
+            fontSize = 10.sp,
             fontWeight = FontWeight.Bold
         )
 
@@ -30,7 +32,7 @@ fun StatBar(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(8.dp)
+                .height(4.dp)
                 .background(
                     color = Color.White.copy(alpha = 0.18f),
                     shape = RoundedCornerShape(50)
@@ -39,7 +41,7 @@ fun StatBar(
             Box(
                 modifier = Modifier
                     .fillMaxWidth(value.coerceIn(0, 10) / 10f)
-                    .height(8.dp)
+                    .height(4.dp)
                     .background(
                         color = Color(0xFFD7B45A),
                         shape = RoundedCornerShape(50)
