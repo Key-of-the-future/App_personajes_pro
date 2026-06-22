@@ -86,15 +86,13 @@ object ChampionsData {
             skins = listOf("Kayn", "Odyssey Kayn", "Heartsteel Kayn"),
             fileKey = "kayn",
             skinLores = listOf(
-                "Shieda Kayn, un practicante sin igual de la letal magia sombría, lucha para alcanzar su verdadero destino: conducir la Orden de la Sombra hacia una nueva era de supremacía joniana. Esgrime la oscura arma viviente Rhaast, inmutable ante la progresiva corrupción de su cuerpo y mente. Solo hay dos resultados posibles: o Kayn somete el arma a su voluntad... o la cuchilla malévola lo consume por completo, para dar lugar a la destrucción de Runaterra.",
-                "Kayn Odisea es el Alto Defensor del Imperio Demaxiano, un líder militar cruel y el antagonista principal de la tripulación de la Estrella del Alba. Reescribe el conflicto con su arma para conectarlo de forma directa con la poderosa sustancia cósmica conocida como Ora y el vacío de la Estrella Oscura.",
-                "Kayn HEARTSTEEL es el rapero principal, compositor y una de las mentes creativas más caóticas de la boyband. Su dinámica interna de doble personalidad con Rhaast se reescribe como una lucha de egos artísticos y un trastorno de identidad musical."
             ),
         ).copy(
             skins = listOf(
                 Skin(
                     name = "Kayn",
                     backgroundName = "kaynsplash_1",
+                    lore = "Shieda Kayn, un practicante sin igual de la letal magia sombría, lucha para alcanzar su verdadero destino: conducir la Orden de la Sombra hacia una nueva era de supremacía joniana. Esgrime la oscura arma viviente Rhaast, inmutable ante la progresiva corrupción de su cuerpo y mente. Solo hay dos resultados posibles: o Kayn somete el arma a su voluntad... o la cuchilla malévola lo consume por completo.",
                     musicPath = "music/kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/kayn.glb", "voices/kayn.m4a", kaynSkills()),
@@ -105,6 +103,7 @@ object ChampionsData {
                 Skin(
                     name = "Odyssey Kayn",
                     backgroundName = "kaynsplash_2",
+                    lore =  "Kayn Odisea es el Alto Defensor del Imperio Demaxiano, un líder militar cruel y el antagonista principal de la tripulación de la Estrella del Alba. Reescribe el conflicto con su arma para conectarlo de forma directa con la poderosa sustancia cósmica conocida como Ora y el vacío de la Estrella Oscura.",
                     musicPath = "music/odyssey_kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/odyssey_kayn.glb", "voices/odyssey_kayn.m4a", kaynSkills()),
@@ -115,6 +114,7 @@ object ChampionsData {
                 Skin(
                     name = "Heartsteel Kayn",
                     backgroundName = "kaynsplash_3",
+                    lore = "Kayn HEARTSTEEL es el rapero principal, compositor y una de las mentes creativas más caóticas de la boyband. Su dinámica interna de doble personalidad con Rhaast se reescribe como una lucha de egos artísticos y un trastorno de identidad musical.",
                     musicPath = "music/heartsteel_kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/heartsteel_kayn.glb", "voices/heartsteel_kayn.m4a", kaynSkills()),
@@ -207,16 +207,13 @@ object ChampionsData {
             skins = listOf("Evelynn", "Coven Evelynn", "K/DA ALL OUT Evelynn"),
             fileKey = "evelynn",
             skinLores = listOf(
-                "Dentro de las oscuras vetas de Runaterra, la demonio Evelynn acecha a su siguiente víctima. Seduce a su presa con la apariencia voluptuosa de una mujer humana, pero una vez que alguien sucumbe ante sus encantos, Evelynn revela su verdadera forma. Es en ese momento somete a su víctima a un inimaginable tormento y se deleita con su dolor. Para el demonio, estos encuentros son amoríos inocentes. Para el resto de Runaterra, son historias macabras de lujuria que terminaron mal y atroces recordatorios del costo que tiene el deseo lascivo.",
-                "Evelynn Aquelarre es una de las brujas más poderosas, letales y singulares del culto, nacida como una criatura híbrida: mitad humana y mitad Dios Antiguo. A diferencia de sus hermanas que son mortales que ganaron poder mediante pactos, el poder de Evelynn es de nacimiento.",
-                "Evelynn K/DA ALL OUT es la vocalista principal, diva definitiva y la fuerza creativa más imponente del grupo. Esta era discográfica, que acompaña al lanzamiento del EP ALL OUT, muestra a una Evelynn mucho más madura, enfocada en la alta costura y en consolidar su estatus como un ícono de la moda global."
             ),
         ).copy(
             skins = listOf(
                 Skin(
                     name = "Evelynn",
                     backgroundName = "evelynnsplash_1",
-                    lore = "Aquí escribes el lore de Heartsteel Kayn.",
+                    lore = "Dentro de las oscuras vetas de Runaterra, la demonio Evelynn acecha a su siguiente víctima. Seduce a su presa con la apariencia voluptuosa de una mujer humana, pero una vez que alguien sucumbe ante sus encantos, Evelynn revela su verdadera forma. Es en ese momento somete a su víctima a un inimaginable tormento y se deleita con su dolor. Para el demonio, estos encuentros son amoríos inocentes. Para el resto de Runaterra, son historias macabras de lujuria que terminaron mal y atroces recordatorios del costo que tiene el deseo lascivo.",
                     musicPath = "music/evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/evelynn.glb", "voices/evelynn.m4a", defaultSkills("evelynn")),
@@ -226,6 +223,7 @@ object ChampionsData {
                 Skin(
                     name = "Coven Evelynn",
                     backgroundName = "evelynnsplash_2",
+                    lore = "Evelynn Aquelarre es una de las brujas más poderosas, letales y singulares del culto, nacida como una criatura híbrida: mitad humana y mitad Dios Antiguo. A diferencia de sus hermanas que son mortales que ganaron poder mediante pactos, el poder de Evelynn es de nacimiento.",
                     musicPath = "music/coven_evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/coven_evelynn.glb", "voices/coven_evelynn.m4a", defaultSkills("evelynn")),
@@ -235,6 +233,7 @@ object ChampionsData {
                 Skin(
                     name = "K/DA ALL OUT Evelynn",
                     backgroundName = "evelynnsplash_3",
+                    lore = "Evelynn K/DA ALL OUT es la vocalista principal, diva definitiva y la fuerza creativa más imponente del grupo. Esta era discográfica, que acompaña al lanzamiento del EP ALL OUT, muestra a una Evelynn mucho más madura, enfocada en la alta costura y en consolidar su estatus como un ícono de la moda global.",
                     musicPath = "music/kda_all_out_evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/k_da_all_out_evelynn.glb", "voices/k_da_all_out_evelynn.m4a", defaultSkills("evelynn")),
@@ -426,7 +425,7 @@ object ChampionsData {
                 Skill("Tiro Tóxico", "Los ataques básicos envenenan al impacto e infligen daño mágico por segundo en un lapso de 4 segundos.", "teemo_passive"),
                 Skill("Dardo Cegador", "Nubla la visión de un enemigo con un potente veneno, lo que le inflige daño y lo ciega mientras dure el efecto.", "teemo_q"),
                 Skill("Movimiento Rápido", "Dá velocidad de movimiento pasiva hasta entrar en combate o recibir daño, al activarla rueda un pequeño tramo para obtener velocidad de movimiento duplicada aunque se reciba daño.", "teemo_w"),
-                Skill("Tácticas de Guerrilla", "", "teemo_e"),
+                Skill("Tácticas de Guerrilla", "Teemo se camufla y se vuelve invisible en un radio al rededor de él, lo pueden localizar los enemigos al acercarse más de ese radio o después de que teemo se haya movido por más de 3 segundos con la habilidad activa", "teemo_e"),
                 Skill("Trampa Nociva", "Teemo arroja una trampa venenosa explosiva utilizando uno de los hongos que lleva en su mochila. Si un enemigo la pisa, la trampa libera una nube venenosa que ralentiza a los enemigos y les inflige daño prolongado. Si Teemo arroja un hongo hacia otro hongo, este rebotará y obtendrá alcance adicional.", "teemo_r")
             )
 
