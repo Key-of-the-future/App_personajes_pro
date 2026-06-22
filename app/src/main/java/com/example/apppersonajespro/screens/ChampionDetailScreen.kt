@@ -26,10 +26,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import com.example.apppersonajespro.components.ChampionModelViewer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.border
 import androidx.compose.runtime.LaunchedEffect
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
+import androidx.core.content.FileProvider
+import java.io.File
+import java.io.FileOutputStream
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.ui.platform.LocalContext
+import com.example.apppersonajespro.utils.MusicPlayer
 import com.example.apppersonajespro.utils.SoundPlayer
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -68,6 +78,9 @@ fun ChampionDetailScreen(
 
     val context = LocalContext.current
 
+    val currentMusicPath =
+        champion.skins[selectedSkin].musicPath
+
     val currentVoicePath = champion
         .skins[selectedSkin]
         .forms[selectedForm]
@@ -77,9 +90,18 @@ fun ChampionDetailScreen(
         SoundPlayer.playFromAssets(context, currentVoicePath)
     }
 
+    LaunchedEffect(currentMusicPath) {
+
+        MusicPlayer.play(
+            context,
+            currentMusicPath
+        )
+    }
+
     DisposableEffect(Unit) {
         onDispose {
             SoundPlayer.stop()
+            MusicPlayer.stop()
         }
     }
 
@@ -185,6 +207,12 @@ fun ChampionDetailScreen(
                             modifier = Modifier
                                 .size(36.dp)
                                 .clip(RoundedCornerShape(6.dp))
+                                .border(
+                                    width = 1.dp,
+                                    color = Color(0xFFD7B45A).copy(alpha = 0.85f),
+                                    shape = RoundedCornerShape(6.dp)
+                                )
+                                .background(Color.Black.copy(alpha = 0.35f))
                                 .clickable {
                                     selectedSkill = skill
                                 },
@@ -262,7 +290,7 @@ fun ChampionDetailScreen(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(
-                        top = 30.dp,
+                        top = 50.dp,
                         end = 22.dp),
                 verticalArrangement = Arrangement.spacedBy(25.dp)
             ) {
@@ -270,69 +298,60 @@ fun ChampionDetailScreen(
                     onClick = {
                         showLore = true
                     },
-                    modifier = Modifier
-                        .size(28.dp)
-                        .background(
-                            Color(0xFFD7B45A),
-                            shape = CircleShape
-                        )
+                    modifier = Modifier.size(20.dp)
                 ) {
                     Icon(
                         Icons.Default.Info,
                         contentDescription = "Lore",
-                        tint = Color(0xFF0B1520),
-                        modifier = Modifier.size(15.dp)
+                        tint = Color(0xFFD7B45A),
+                        modifier = Modifier.size(20.dp)
                     )
                 }
 
                 IconButton(
-                    onClick = { },
-                    modifier = Modifier
-                        .size(28.dp)
-                        .background(
-                            Color(0xFFD7B45A),
-                            shape = CircleShape
-                        )
+                    onClick = {
+                        openChampionLocation(context, champion.region)
+                    },
+                    modifier = Modifier.size(20.dp)
                 ) {
                     Icon(
                         Icons.Default.LocationOn,
                         contentDescription = "Ubicacion",
-                        tint = Color(0xFF0B1520),
-                        modifier = Modifier.size(15.dp)
+                        tint = Color(0xFFD7B45A),
+                        modifier = Modifier.size(20.dp)
                     )
                 }
 
                 IconButton(
-                    onClick = { },
-                    modifier = Modifier
-                        .size(28.dp)
-                        .background(
-                            Color(0xFFD7B45A),
-                            shape = CircleShape
-                        )
+                    onClick = {
+                        callChampion(context, champion.phone)
+                    },
+                    modifier = Modifier.size(20.dp)
                 ) {
                     Icon(
                         Icons.Default.Call,
                         contentDescription = "Llamar",
-                        tint = Color(0xFF0B1520),
-                        modifier = Modifier.size(15.dp)
+                        tint = Color(0xFFD7B45A),
+                        modifier = Modifier.size(20.dp)
                     )
                 }
 
                 IconButton(
-                    onClick = { },
-                    modifier = Modifier
-                        .size(28.dp)
-                        .background(
-                            Color(0xFFD7B45A),
-                            shape = CircleShape
+                    onClick = {
+                        shareChampion(
+                            context = context,
+                            imageRes = backgroundImage,
+                            championName = champion.name,
+                            skinName = champion.skins[selectedSkin].name
                         )
+                    },
+                    modifier = Modifier.size(20.dp)
                 ) {
                     Icon(
                         Icons.Default.Share,
                         contentDescription = "Compartir",
-                        tint = Color(0xFF0B1520),
-                        modifier = Modifier.size(15.dp)
+                        tint = Color(0xFFD7B45A),
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }
@@ -354,8 +373,8 @@ fun ChampionDetailScreen(
             ) {
                 Text(
                     text = "‹",
-                    color = Color.White,
-                    fontSize = 42.sp
+                    color = Color.Yellow,
+                    fontSize = 44.sp
                 )
             }
 
@@ -376,14 +395,14 @@ fun ChampionDetailScreen(
             ) {
                 Text(
                     text = "›",
-                    color = Color.White,
-                    fontSize = 42.sp
+                    color = Color.Yellow,
+                    fontSize = 44.sp
                 )
             }
 
             if (selectedSkill != null) {
                 androidx.compose.material3.AlertDialog(
-                    modifier = Modifier.fillMaxWidth(0.72f),
+                    modifier = Modifier.fillMaxWidth(0.82f),
                     onDismissRequest = {
                         selectedSkill = null
                     },
@@ -397,11 +416,31 @@ fun ChampionDetailScreen(
                         )
                     },
                     text = {
-                        Text(
-                            text = selectedSkill!!.description,
-                            color = Color.White,
-                            fontSize = 13.sp
-                        )
+                        Column(
+                            modifier = Modifier
+                                .heightIn(max = 360.dp)
+                                .verticalScroll(rememberScrollState()),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            val skillImage = getDrawableId(selectedSkill!!.iconName)
+
+                            Image(
+                                painter = painterResource(id = skillImage),
+                                contentDescription = selectedSkill!!.name,
+                                modifier = Modifier
+                                    .size(90.dp)
+                                    .clip(RoundedCornerShape(12.dp)),
+                                contentScale = ContentScale.Crop
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = selectedSkill!!.description,
+                                color = Color.White,
+                                fontSize = 13.sp
+                            )
+                        }
                     },
                     confirmButton = {
                         Text(
@@ -456,4 +495,65 @@ fun ChampionDetailScreen(
             }
         }
     }
+}
+
+private fun callChampion(context: Context, phone: String) {
+    val intent = Intent(Intent.ACTION_DIAL).apply {
+        data = Uri.parse("tel:$phone")
+    }
+
+    context.startActivity(intent)
+}
+
+private fun openChampionLocation(context: Context, region: String) {
+    val uri = Uri.parse("geo:0,0?q=${Uri.encode("$region Runeterra")}")
+
+    val intent = Intent(Intent.ACTION_VIEW, uri)
+
+    context.startActivity(intent)
+}
+
+private fun shareChampion(
+    context: Context,
+    imageRes: Int,
+    championName: String,
+    skinName: String
+) {
+    val bitmap = BitmapFactory.decodeResource(
+        context.resources,
+        imageRes
+    )
+
+    val file = File(
+        context.cacheDir,
+        "${championName}_share.png"
+    )
+
+    FileOutputStream(file).use { output ->
+        bitmap.compress(
+            android.graphics.Bitmap.CompressFormat.PNG,
+            100,
+            output
+        )
+    }
+
+    val uri = FileProvider.getUriForFile(
+        context,
+        "${context.packageName}.provider",
+        file
+    )
+
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "image/png"
+        putExtra(Intent.EXTRA_STREAM, uri)
+        putExtra(
+            Intent.EXTRA_TEXT,
+            "Mira a $championName con la skin $skinName en mi app Legends Atlas."
+        )
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+
+    context.startActivity(
+        Intent.createChooser(shareIntent, "Compartir campeón")
+    )
 }

@@ -95,6 +95,7 @@ object ChampionsData {
                 Skin(
                     name = "Kayn",
                     backgroundName = "kaynsplash_1",
+                    musicPath = "music/kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/kayn.glb", "voices/kayn.m4a", kaynSkills()),
                         ChampionForm("Rhaast", "models/kayn/kayn_rhaast.glb", "voices/rhaast.m4a", rhaastSkills()),
@@ -104,6 +105,7 @@ object ChampionsData {
                 Skin(
                     name = "Odyssey Kayn",
                     backgroundName = "kaynsplash_2",
+                    musicPath = "music/odyssey_kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/odyssey_kayn.glb", "voices/odyssey_kayn.m4a", kaynSkills()),
                         ChampionForm("Rhaast", "models/kayn/odyssey_kayn_rhaast.glb", "voices/odyssey_rhaast.m4a", rhaastSkills()),
@@ -113,6 +115,7 @@ object ChampionsData {
                 Skin(
                     name = "Heartsteel Kayn",
                     backgroundName = "kaynsplash_3",
+                    musicPath = "music/heartsteel_kayn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Kayn", "models/kayn/heartsteel_kayn.glb", "voices/heartsteel_kayn.m4a", kaynSkills()),
                         ChampionForm("Rhaast", "models/kayn/heartsteel_kayn_rhaast.glb", "voices/heartsteel_rhaast.m4a", rhaastSkills()),
@@ -214,6 +217,7 @@ object ChampionsData {
                     name = "Evelynn",
                     backgroundName = "evelynnsplash_1",
                     lore = "Aquí escribes el lore de Heartsteel Kayn.",
+                    musicPath = "music/evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/evelynn.glb", "voices/evelynn.m4a", defaultSkills("evelynn")),
                         ChampionForm("Demoníaca", "models/evelynn/evelynn_demon.glb", "voices/evelynn_demon.m4a", defaultSkills("evelynn"))
@@ -222,6 +226,7 @@ object ChampionsData {
                 Skin(
                     name = "Coven Evelynn",
                     backgroundName = "evelynnsplash_2",
+                    musicPath = "music/coven_evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/coven_evelynn.glb", "voices/coven_evelynn.m4a", defaultSkills("evelynn")),
                         ChampionForm("Demoníaca", "models/evelynn/coven_evelynn_demon.glb", "voices/coven_evelynn_demon.m4a", defaultSkills("evelynn"))
@@ -230,6 +235,7 @@ object ChampionsData {
                 Skin(
                     name = "K/DA ALL OUT Evelynn",
                     backgroundName = "evelynnsplash_3",
+                    musicPath = "music/kda_all_out_evelynn_theme.mp3",
                     forms = listOf(
                         ChampionForm("Normal", "models/evelynn/k_da_all_out_evelynn.glb", "voices/k_da_all_out_evelynn.m4a", defaultSkills("evelynn")),
                         ChampionForm("Demoníaca", "models/evelynn/k_da_all_out_evelynn_demon.glb", "voices/k_da_all_out_demon_evelynn.m4a", defaultSkills("evelynn"))
@@ -335,6 +341,7 @@ object ChampionsData {
                     name = skinName,
                     backgroundName = "${fileKey}splash_${skinIndex + 1}",
                     lore = skinLores.getOrElse(skinIndex) { "Lore pendiente de skin." },
+                    musicPath = "music/${skinKey}.mp3",
                     forms = listOf(
                         ChampionForm(
                             name = "Base",
@@ -349,36 +356,151 @@ object ChampionsData {
     }
 
     private fun defaultSkills(fileKey: String): List<Skill> {
-        return listOf(
-            Skill("Pasiva", "Descripción de la pasiva. Editar después.", "${fileKey}_passive"),
-            Skill("Habilidad 1", "Descripción de la primera habilidad. Editar después.", "${fileKey}_q"),
-            Skill("Habilidad 2", "Descripción de la segunda habilidad. Editar después.", "${fileKey}_w"),
-            Skill("Habilidad 3", "Descripción de la tercera habilidad. Editar después.", "${fileKey}_e"),
-            Skill("Definitiva", "Descripción de la definitiva. Editar después.", "${fileKey}_r")
-        )
+        return when (fileKey) {
+
+            "ahri" -> listOf(
+                Skill("Ladrona de Esencias", "Al lanzar 3 habilidades que impacten a un enemigo, la siguiente la curará al igual si un enemigo muere cerca de ella.", "ahri_passive"),
+                Skill("Orbe del Engaño", "Lanza un orbe que hace daño mágico de ida y vuelta.", "ahri_q"),
+                Skill("Fuego Zorruno", "Obtiene velocidad de movimiento y lanza 3 proyectiles mágicos al enemigo más cercano.", "ahri_w"),
+                Skill("Encanto", "Ahri lanza un beso que encanta al primer enemigo alcanzado y lo provoca a acercarse a ella.", "ahri_e"),
+                Skill("Impulso Espiritual", "Obtiene 3 cargas para desplazarse mientras dispara rayos de esencia al usarla.", "ahri_r")
+            )
+
+            "lux" -> listOf(
+                Skill("Iluminación", "Los hechizos dañinos de Lux cargan de energía al objetivo durante algunos segundos. Su siguiente ataque desata la energía e inflige daño mágico adicional al objetivo (según el nivel de Lux).", "lux_passive"),
+                Skill("Hechizo Luminoso", "Lux desata una esfera de luz que atrapa e inflige daño hasta a dos unidades enemigas.", "lux_q"),
+                Skill("Barrera Prismática", "Lux lanza su vara y deforma la luz alrededor de cualquier objetivo aliado que alcanza, lo que los protege del daño enemigo.", "lux_w"),
+                Skill("Singularidad Brillante", "Dispara una anomalía de luz retorcida en una zona que ralentiza a los enemigos cercanos. Lux puede detonarla para infligir daño a los enemigos en el área de efecto.", "lux_e"),
+                Skill("Chispa Final", "Tras reunir la energía necesaria, Lux lanza un rayo de luz que inflige daño a todos los objetivos en el área. Además, activa la habilidad pasiva de Lux y restablece la duración de Iluminación.", "lux_r")
+            )
+
+            "senna" -> listOf(
+                Skill("Absolución", "Cuando las unidades mueren cerca de Senna, la Niebla Negra atrapa sus almas periódicamente. Senna puede atacar a estas almas para liberarlas, con lo que absorbe la niebla que las mantiene muertas. La niebla alimenta el poder de su cañón reliquia con daño de ataque, alcance de ataque y probabilidad de golpe crítico aumentados. Los ataques del cañón reliquia de Senna tardan más en disparar, infligen daño adicional y le otorgan una porción de la velocidad de movimiento de su objetivo por un momento.", "senna_passive"),
+                Skill("Oscuridad Lacerante", "Desde los dos compartimentos de su cañón reliquia, Senna dispara un rayo combinado de luz y sombra contra un objetivo, lo que cura a aliados y daña a enemigos.", "senna_q"),
+                Skill("Abrazo Final", "Senna lanza una ola de Niebla Negra. Si impacta a un enemigo, la oleada hambrienta se abalanza sobre él para inmovilizarlo, junto con todas las unidades cercanas después de un momento.", "senna_w"),
+                Skill("Maldición de la Niebla Negra", "Senna canaliza la niebla que almacena en su arma, genera una tormenta a su alrededor y abraza la oscuridad para convertirse en un espectro. Los aliados que entren en la zona se camuflan y también aparecen como espectros mientras la niebla los cubre. Los espectros obtienen velocidad de movimiento aumentada, no son seleccionables y ocultan su identidad.", "senna_e"),
+                Skill("Cañón de las sombras", "Senna invoca las piedras reliquia de los Centinelas caídos, partiendo su cañón reliquia en un despliegue de sombra y luz. Después dispara un rayo global que escuda a los aliados contra el daño, mientras los enemigos en el centro reciben daño.", "senna_r")
+            )
+
+            "gwen" -> listOf(
+                Skill("Mil Cortes", "Los ataques de Gwen infligen daño mágico adicional según la vida de los objetivos. Se cura una parte del daño que inflige a campeones con este efecto.", "gwen_passive"),
+                Skill("¡A Cortar!", "Gwen corta con sus tijeras hasta 6 veces en un cono para infligir daño mágico. Gwen inflige daño verdadero a unidades en el centro y les aplica su pasiva con cada corte.", "gwen_q"),
+                Skill("Niebla Consagrada", "Gwen invoca niebla que la protege de los enemigos que están fuera de ella. Solo los enemigos que entren a la niebla la pueden fijar como objetivo.", "gwen_w"),
+                Skill("Costura Letal", "Gwen se desplaza una corta distancia para luego obtener velocidad de ataque, alcance de ataque y daño mágico al impacto durante unos segundos. Si impacta a un enemigo en ese tiempo, el enfriamiento de esta habilidad se restablece parcialmente.", "gwen_e"),
+                Skill("Ráfaga de Agujas", "Gwen lanza una aguja que ralentiza a los enemigos alcanzados, inflige daño mágico y aplica Mil Cortes a los campeones impactados. Esta habilidad se puede lanzar hasta dos veces más. Cada lanzamiento arroja agujas adicionales e inflige más daño.", "gwen_r")
+            )
+
+            "thresh" -> listOf(
+                Skill("Condenación", "Thresh puede cosechar las almas de enemigos que mueren cerca de él, lo que le otorga Armadura y Poder de Habilidad de forma permanente.", "thresh_passive"),
+                Skill("Sentencia a Muerte", "Thresh envuelve a un enemigo en cadenas y lo jala hacia él. Activar esta habilidad por segunda vez atrae a Thresh hacia el enemigo.", "thresh_q"),
+                Skill("Pasaje Oscuro", "Thresh lanza una linterna que protege a los campeones aliados cercanos contra daño. Los aliados pueden hacer clic en la linterna para desplazarse hacia Thresh.", "thresh_w"),
+                Skill("Despellejar", "Los ataques de Thresh se cargan e infligen más daño mientras más espere entre ataques. Al activarse, Thresh desliza su cadena y lanza a todos los enemigos alcanzados hacia la dirección del impacto.", "thresh_e"),
+                Skill("La Caja", "Una prisión de muros que ralentiza e inflige daño al romperse.", "thresh_r")
+            )
+
+            "akali" -> listOf(
+                Skill("Marca de la Asesina", "Al infligir daño de hechizos a un campeón, se crea un anillo de energía a su alrededor. Al salir de ese anillo, potencia el siguiente ataque de Akali con alcance y daño adicionales.", "akali_passive"),
+                Skill("Ráfaga de los Cinco Filos", "Akali arroja cinco kunai que ralentizan e infligen daño según su daño de ataque y su poder de habilidad adicionales.", "akali_q"),
+                Skill("Manto Crepuscular", "Akali desata una cortina de humo y obtiene velocidad de movimiento por un momento. Al estar dentro del manto, Akali se vuelve invisible y no puede ser alcanzada por hechizos y ataques enemigos. Quedará revelada por un instante si ataca o usa habilidades.", "akali_w"),
+                Skill("Maniobra de Shuriken", "Realiza una voltereta hacia atrás y arroja un shuriken hacia adelante que inflige daño mágico. El primer enemigo o nube de humo impactados quedan marcados. Vuelve a lanzarlo para desplazarte hacia el objetivo marcado e infligir daño adicional.", "akali_e"),
+                Skill("Ejecución Perfecta", "Akali salta hacia una dirección para infligir daño a los enemigos alcanzados. Relanzamiento: Akali se desplaza en una dirección y ejecuta a todos los enemigos alcanzados.", "akali_r")
+            )
+
+            "seraphine" -> listOf(
+                Skill("Presencia Escénica", "Seraphine lanzará dos veces cada segundo hechizo básico. Además, lanzar hechizos cerca de aliados le otorga daño mágico y alcance adicionales en su siguiente ataque básico.", "seraphine_passive"),
+                Skill("Nota Alta", "Seraphine lanza un proyectil e inflige daño en una zona.", "seraphine_q"),
+                Skill("Sonido Envolvente", "Seraphine escuda y acelera a los aliados cercanos. Si ya tiene un escudo, también curará a los aliados cercanos.", "seraphine_w"),
+                Skill("¡Siente el Ritmo!", "Seraphine inflige daño y reduce la velocidad de movimiento de los enemigos en una línea.", "seraphine_e"),
+                Skill("¡Otra!", "Seraphine inflige daño y encanta a los enemigos alcanzados, lo que restablece el alcance con cada campeón enemigo o aliado impactado.", "seraphine_r")
+            )
+
+            "morgana" -> listOf(
+                Skill("Sifón del Alma", "Morgana drena el espíritu de sus enemigos y se cura mientras inflige daño a campeones, súbditos grandes y monstruos de la jungla grandes y medianos.", "morgana_passive"),
+                Skill("Hechizo Oscuro", "Morgana inmoviliza a un enemigo con magia oscura y lo obliga a sentir el dolor que ha causado, lo que le inflige daño mágico.", "morgana_q"),
+                Skill("Sombra Maldita", "Morgana proyecta una sombra maldita en un área que inflige daño a los enemigos que osen pisar su círculo oscuro. Reciben daño mágico prolongado que aumenta entre menos vida tenga el enemigo afectado.", "morgana_w"),
+                Skill("Escudo Negro", "Morgana confiere a un aliado una barrera protectora de fuego estelar que absorbe daño mágico y anula efectos de control de masas hasta que se rompe.", "morgana_e"),
+                Skill("Grilletes del Alma", "Morgana libera toda la fuerza de su poder celestial mientras abre sus alas y se eleva. Lanza cadenas de dolor oscuro a los campeones enemigos cercanos, con lo que obtiene velocidad de movimiento. Las cadenas ralentizan, infligen daño inicial y, después de un momento, aturden a los que no pueden romperlas.", "morgana_r")
+            )
+
+            "teemo" -> listOf(
+                Skill("Tiro Tóxico", "Los ataques básicos envenenan al impacto e infligen daño mágico por segundo en un lapso de 4 segundos.", "teemo_passive"),
+                Skill("Dardo Cegador", "Nubla la visión de un enemigo con un potente veneno, lo que le inflige daño y lo ciega mientras dure el efecto.", "teemo_q"),
+                Skill("Movimiento Rápido", "Dá velocidad de movimiento pasiva hasta entrar en combate o recibir daño, al activarla rueda un pequeño tramo para obtener velocidad de movimiento duplicada aunque se reciba daño.", "teemo_w"),
+                Skill("Tácticas de Guerrilla", "", "teemo_e"),
+                Skill("Trampa Nociva", "Teemo arroja una trampa venenosa explosiva utilizando uno de los hongos que lleva en su mochila. Si un enemigo la pisa, la trampa libera una nube venenosa que ralentiza a los enemigos y les inflige daño prolongado. Si Teemo arroja un hongo hacia otro hongo, este rebotará y obtendrá alcance adicional.", "teemo_r")
+            )
+
+            "rell" -> listOf(
+                Skill("Rompemoldes", "Los ataques y las habilidades de Rell infligen daño mágico adicional y roban armadura y resistencia mágica al impacto.", "rell_passive"),
+                Skill("Golpe Devastador", "Rell inflige daño mágico a las unidades en una línea, rompe sus escudos y los aturde.", "rell_q"),
+                Skill("Ferromancia: Desplome", "Montada: Rell se desmonta y cae con fuerza en su armadura, lo que lanza por el aire a los enemigos y obtiene un escudo grande. Mientras esté desmontada, obtiene armadura, resistencia mágica, velocidad de ataque y alcance de ataque, pero queda ralentizada. Desmontada: Rell forma su montura para obtener un aumento de velocidad y lanzar por el aire al próximo enemigo que ataque.", "rell_w"),
+                Skill("Tilteo Total", "Pasiva: Rell obtiene velocidad de movimiento fuera de combate. Activa: Rell y un aliado obtienen velocidad de movimiento progresiva que se duplica al desplazarse hacia enemigos y entre sí. Su siguiente ataque explota, lo que inflige daño mágico.", "rell_e"),
+                Skill("Tormenta Magnética", "Rell explota con una furia magnética, la cual atrae hacia ella de forma violenta a los enemigos cercanos. Luego, Rell arrastra hacia ella a los enemigos cercanos de forma continua por un breve periodo e inflige daño mágico prolongado.", "rell_r")
+            )
+
+            "evelynn" -> listOf(
+                Skill("Sombra Demoníaca", "Cuando no se encuentra en combate, Evelynn activa Sombra Demoníaca. Sombra Demoníaca cura a Evelynn cuando tiene poca vida y le otorga Camuflaje a partir del nivel 5.", "evelynn_passive"),
+                Skill("Púas de Odio", "Desata dos líneas de púas, lo que inflige daño mágico y se puede relanzar en un lapso de 4 seg.", "evelynn_q"),
+                Skill("Seducción", "Evelynn maldice a su objetivo, lo que hace que, tras una espera, su siguiente ataque o hechizo encante y reduzca la resistencia mágica de su objetivo.", "evelynn_w"),
+                Skill("Latigazo", "Evelynn ataca a su objetivo con su látigo, lo que inflige daño. Luego, obtiene velocidad de movimiento durante unos momentos.", "evelynn_e"),
+                Skill("Última Caricia", "Evelynn se vuelve inalcanzable y diezma la zona frente a ella antes de teletransportarse una larga distancia hacia atrás.", "evelynn_r")
+            )
+
+            "vex" -> listOf(
+                Skill("Pena y Pesar", "Vex se potencia de forma periódica, lo que hace que su siguiente habilidad básica asuste a los enemigos e interrumpa los desplazamientos. Cada vez que un enemigo cercano se desplaza, Vex aplica una marca que se puede consumir para infligir daño adicional que también reduce el enfriamiento de su estado potenciado.", "vex_passive"),
+                Skill("Descarga Mistral", "Lanza un misil dañino que acelera durante su vuelo.", "vex_q"),
+                Skill("Espacio Personal", "Obtiene un escudo y daña a los enemigos cercanos.", "vex_w"),
+                Skill("Amenaza Umbría", "Invoca una zona dañina y ralentizadora que aplica Pesar a los enemigos.", "vex_e"),
+                Skill("¡Haz lo Tuyo, Sombra!", "Dispara un misil que marca a un campeón enemigo. Vuelve a lanzarla para desplazarte hacia ellos e infligirles daño.", "vex_r")
+            )
+
+            "jhin" -> listOf(
+                Skill("Murmullo", "El cañón de mano de Jhin, Murmullo, es un instrumento preciso diseñado para infligir daño superior. Dispara a una velocidad fija y solo tiene cuatro disparos. Jhin imbuye la última bala con magia oscura para realizar un golpe crítico e infligir daño de ejecución adicional. Cada vez que Murmullo inflige un golpe crítico, inspira a Jhin con un aumento de velocidad de movimiento.", "jhin_passive"),
+                Skill("Granada Bailarina", "Jhin lanza un cartucho mágico contra el enemigo. Puede golpear hasta cuatro objetivos y obtiene daño cada vez que mata.", "jhin_q"),
+                Skill("Brote Mortal", "Jhin esgrime su bastón y dispara una sola bala con un enorme alcance. Atraviesa a los súbditos y monstruos, pero se detiene en el primer campeón impactado. El objetivo queda inmovilizado si fue alcanzado recientemente por ataques de aliados de Jhin, Trampas de Loto, o si recibió daño de Jhin.", "jhin_w"),
+                Skill("Audiencia Cautiva", "Jhin coloca una trampa de loto invisible que florece cuando se camina por encima de ella y ralentiza a los enemigos cercanos antes de infligir daño con una explosión de pétalos serrados. La Belleza de la Muerte: Cuando Jhin mata a un campeón enemigo, una trampa florecerá cerca del cadáver.", "jhin_e"),
+                Skill("Llamado a Escena", "Jhin canaliza, lo que transforma a Murmullo en un mega cañón montado al hombro. Puede disparar 4 superbalas desde distancias extremas que atraviesan a los súbditos y a los monstruos, pero se detienen en el primer campeón que impacta. Murmullo incapacita a los enemigos que golpea, lo que los ralentiza y retrasa el daño de ejecución. El cuarto disparo está perfectamente diseñado, es épicamente poderoso, y garantiza un golpe crítico.", "jhin_r")
+            )
+
+            "viego" -> listOf(
+                Skill("Dominio del Soberano", "Los enemigos que caen ante Viego se convierten en espectros. Viego se apodera por un momento del cuerpo del enemigo muerto cuando ataca a un espectro, con lo que se cura un porcentaje de la vida máxima de su objetivo y obtiene acceso a sus habilidades básicas y objetos. Reemplaza su definitiva por un lanzamientos sin costo de su propia definitiva.", "viego_passive"),
+                Skill("Espada del Rey Arruinado", "La espada espectral de Viego inflige daño adicional al impacto igual a un porcentaje de la vida actual de forma pasiva y ataca dos veces a los enemigos que haya impactado recientemente con una habilidad para robarles vida. Viego puede activar esta habilidad para realizar una estocada con su mandoble y empalar a los enemigos delante de él.", "viego_q"),
+                Skill("Fauces Espectrales", "Viego carga antes de desplazarse hacia adelante y libera una bola de Niebla Negra concentrada que aturde al primer enemigo alcanzado.", "viego_w"),
+                Skill("Sendero Arruinado", "Viego ordena a la Niebla Negra que vigile y rodee una parte del terreno. Viego puede esconderse en la Niebla como un espectro y así obtener camuflaje, velocidad de movimiento y velocidad de ataque.", "viego_e"),
+                Skill("Rompecorazones", "Viego se teletransporta a un lugar cercano y ejecuta a un campeón enemigo al llegar, perforando su corazón y causando una onda de choque destructiva a su alrededor que repele a sus aliados.", "viego_r")
+            )
+
+            else -> listOf(
+                Skill("Pasiva", "Descripción pendiente.", "${fileKey}_passive"),
+                Skill("Q", "Descripción pendiente.", "${fileKey}_q"),
+                Skill("W", "Descripción pendiente.", "${fileKey}_w"),
+                Skill("E", "Descripción pendiente.", "${fileKey}_e"),
+                Skill("R", "Descripción pendiente.", "${fileKey}_r")
+            )
+        }
     }
 
     private fun kaynSkills(): List<Skill> = listOf(
-        Skill("Pasiva", "Descripción pasiva de Kayn.", "kayn_passive"),
-        Skill("Q", "Descripción Q de Kayn.", "kayn_q"),
-        Skill("W", "Descripción W de Kayn.", "kayn_w"),
-        Skill("E", "Descripción E de Kayn.", "kayn_e"),
-        Skill("R", "Descripción R de Kayn.", "kayn_r")
+        Skill("La Guadaña Darkin", "Kayn empuña un arma antigua y pelea contra Rhaast, el darkin en su interior, por el control de su cuerpo. El Darkin triunfará o Kayn dominará a Rhaast y se convertirá en el Asesino Sombrío. Darkin: cura un porcentaje del daño de hechizos infligido a campeones. Asesino Sombrío: inflige daño adicional los primeros segundos en combate contra campeones enemigos.", "kayn_passive"),
+        Skill("Corte Segador", "Kayn se desplaza y luego ataca. Ambas acciones infligen daño físico.", "kayn_q"),
+        Skill("Alcance de Cuchilla", "Kayn inflige daño físico y ralentiza objetivos en una línea.", "kayn_w"),
+        Skill("Paso Sombrío", "Kayn obtiene velocidad de movimiento y se cura mientras pueda caminar por el terreno.", "kayn_e"),
+        Skill("Transgresión del Umbral", "Kayn se esconde en el cuerpo de un enemigo e inflige daño físico masivo cuando sale.", "kayn_r")
     )
 
     private fun rhaastSkills(): List<Skill> = listOf(
-        Skill("Pasiva", "Descripción pasiva de Rhaast.", "rhaast_passive"),
-        Skill("Q", "Descripción Q de Rhaast.", "rhaast_q"),
-        Skill("W", "Descripción W de Rhaast.", "rhaast_w"),
-        Skill("E", "Descripción E de Rhaast.", "rhaast_e"),
-        Skill("R", "Descripción R de Rhaast.", "rhaast_r")
+        Skill("La Guadaña Darkin (Rhaast)", "El Oscuro ha tomado el control. Se especializa en el aguante y control de masas contra tanques. Cuando inflige daño a campeones enemigos se cura por el daño infligido.", "rhaast_passive"),
+        Skill("Corte Segador (Rhaast)", "Inflige más daño en base a la vida máxima de los enemigos.", "rhaast_q"),
+        Skill("Alcance de Cuchilla (Rhaast)", "Ahora al usarla, levanta a los enemigos por los aires.", "rhaast_w"),
+        Skill("Paso Sombrío (Rhaast)", "Puede caminar sobre muros.", "rhaast_e"),
+        Skill("Transgresión del Umbral (Rhaast)", "Al usarla hace daño en base a la vida del enemigo y se cura en base a esta misma.", "rhaast_r")
     )
 
     private fun assasinSkills(): List<Skill> = listOf(
-        Skill("Pasiva", "Descripción pasiva del Asesino Sombrío.", "assasin_passive"),
-        Skill("Q", "Descripción Q del Asesino Sombrío.", "assasin_q"),
-        Skill("W", "Descripción W del Asesino Sombrío.", "assasin_w"),
-        Skill("E", "Descripción E del Asesino Sombrío.", "assasin_e"),
-        Skill("R", "Descripción R del Asesino Sombrío.", "assasin_r")
+        Skill("La Guadaña Darkin (Asesino Sombrío)", "Kayn ha dominado a Rhaast. Se especializa en eliminar objetivos frágiles con gran movilidad. Cuando Kayn no ha recibido daño sus ataques y habilidades se potencian con daño mágico contra campeones.", "assasin_passive"),
+        Skill("Corte Segador", "Deslizamiento y ataque circular con un aumento de rango de desplazamiento.", "assasin_q"),
+        Skill("Alcance de Cuchilla", "Kayn ahora puede moverse mientras usa esta habilidad y aumenta el alcance de esta misma.", "assasin_w"),
+        Skill("Paso Sombrío", "Obtiene un aumento de velocidad de movimiento al usarla y se vuelve inmune a ralentizaciones.", "assasin_e"),
+        Skill("Transgresión del Umbral", "Aumenta el alcance de la habilidad antes y después de salir de la posesión al enemigo.", "assasin_r")
     )
 }

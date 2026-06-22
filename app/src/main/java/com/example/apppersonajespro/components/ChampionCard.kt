@@ -9,6 +9,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
+import com.example.apppersonajespro.R
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -92,12 +95,13 @@ fun ChampionCard(
                     .padding(bottom = 17.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "🏅",
-                    fontSize = 16.sp
+                Image(
+                    painter = painterResource(id = R.drawable.mastery_icon),
+                    contentDescription = "Maestría",
+                    modifier = Modifier.size(35.dp)
                 )
 
-                Spacer(modifier = Modifier.width(6.dp))
+                Spacer(modifier = Modifier.width(3.dp))
 
                 Text(
                     text = champion.masteryPoints.toString(),
